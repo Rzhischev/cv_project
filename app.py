@@ -12,9 +12,9 @@ PAGES = {
     "YOLO8 Page": yolo8_page
 }
 
-def main():
-    st.sidebar.title("Navigation")
-    choice = st.sidebar.radio("Go to", list(PAGES.keys()))
+# def main():
+#     st.sidebar.title("Navigation")
+#     choice = st.sidebar.radio("Go to", list(PAGES.keys()))
 
     # # Render the page selected by the user
     # selected_page = PAGES[choice]
