@@ -1,21 +1,36 @@
 import streamlit as st
-from PIL import Image
 from ultralytics import YOLO
+from PIL import Image
+import requests
+from io import BytesIO
+
+# Load the YOLO model
+MODEL_PATH = 'pizza.pt'
+model = YOLO(MODEL_PATH)
 
 def app():
-    st.title("Модель Pizza")
-    st.write("Эта страница использует модель Pizza для обработки изображений.")
+    st.title("Модель для обнаружения пицц")
+    st.write("Эта страница использует YOLO модель для обнаружения пицц на изображениях.")
     
-    # Загрузка модели
-    model = YOLO('-------best_pizza.pt')
+    uploaded_image = st.file_uploader("Загрузите изображение", type=["jpg", "jpeg", "png"])
     
-    # Загрузка изображения
-    image_url = st.text_input('Введите URL изображения:', '')
-    
-    if image_url:
-        # Обработка изображения
-        results = model(image_url, conf = 0.4)
+    if uploaded_image is not None:
+        # Read the image from uploaded file
+        image = Image.open(uploaded_image)
+        
+        # Display the original image
+        st.image(image, caption='Загруженное изображение', use_column_width=True)
+        
+        # Perform inference with YOLO model
+        results = model(image, conf=0.4)
+
+        # Show the results
         for r in results:
-            im_array = r.plot()
-            im = Image.fromarray(im_array[..., ::-1])
-            st.image(im, caption='Результат', use_column_width=True)
+            im_array = r.plot()  # plot a BGR numpy array of predictions
+            im = Image.fromarray(im_array[..., ::-1])  # RGB PIL image
+            st.image(im, caption='Результат обнаружения', use_column_width=True)
+
+# Run the Streamlit app
+if __name__ == "__main__":
+    app()
+
