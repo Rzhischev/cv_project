@@ -1,5 +1,9 @@
 import streamlit as st
 from pages import encoder_page, pizza_page, yolo8_page
+import ssl
+
+# Отключение проверки SSL-сертификата
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # Define the pages in the app
 PAGES = {
