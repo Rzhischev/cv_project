@@ -10,8 +10,8 @@ MODEL_PATH = './pages/pizza.pt'
 model = YOLO(MODEL_PATH)
 
 def app():
-    st.title("Модель для обнаружения пицц")
-    st.write("Эта страница использует YOLO модель для обнаружения пицц на изображениях.")
+    st.title("Модель для обнаружения ингридиентов пиццы")
+    st.write("Эта страница использует YOLOv8 модель для обнаружения томатов, оливок, мяса и грибов на пицце.")
     
     # Upload image through file uploader
     uploaded_image = st.file_uploader("Загрузите изображение", type=["jpg", "jpeg", "png"])
