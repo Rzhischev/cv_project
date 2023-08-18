@@ -10,14 +10,15 @@ MODEL_PATH = 'models/encoding.pt'
 def app():
     st.title("Модель Encoder")
     st.write("Эта страница использует модель Encoder для очистки изображений.")
+    
     class ConvAutoencoder(nn.Module):
-    def __init__(self):
-        super(ConvAutoencoder, self).__init__()
-        # encoder
-        self.conv1 = nn.Sequential(
-            nn.Conv2d(1, 16, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(16),
-            nn.SELU()
+        def __init__(self):
+            super(ConvAutoencoder, self).__init__()
+            # encoder
+            self.conv1 = nn.Sequential(
+                nn.Conv2d(1, 16, kernel_size=3, padding=1, bias=False),
+                nn.BatchNorm2d(16),
+                nn.SELU()
             )
 
         self.conv2 = nn.Sequential(
