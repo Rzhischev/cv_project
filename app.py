@@ -1,13 +1,13 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title= 'Computer Vision | ПРОЕКТ',
-    page_icon="🤖",
+    page_title= 'Компьютерное зрение • Computer Vision',
+    page_icon="",
     layout='wide'
     
 )
 
-st.sidebar.header("Home page")
+st.sidebar.header("Main page")
 c1, c2 = st.columns(2)
 
 c2.image('https://kartinkof.club/uploads/posts/2023-05/1683610960_kartinkof-club-p-vetryak-kartinki-44.jpg')
