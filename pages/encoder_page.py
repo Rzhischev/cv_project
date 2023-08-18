@@ -67,7 +67,21 @@ class ConvAutoencoder(nn.Module):
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_PATH = './pages/encoding.pt'
+def get_session_state():
+    """Gets session state from Streamlit.
 
+    Returns:
+        [Server.SessionState]: Session state object.
+    """
+    session_id = get_report_ctx().session_id
+    session_infos = Server.get_current()._get_session_info(session_id)
+    if session_infos is None:
+        raise RuntimeError("Couldn't get your Streamlit Session object.")
+    return session_infos.session._session_state
+
+if 'uploaded_image' not in st.session_state:
+    st.session_state.uploaded_image = None
+    
 @st.cache(allow_output_mutation=True)
 def load_model(model_path, device):
     model = torch.load(model_path, map_location=device)
@@ -107,6 +121,7 @@ def app():
         
         # Показать обработанное изображение с помощью Streamlit
         st.image(processed_image_pil, caption='Обработанное изображение', use_column_width=True)
+        uploaded_file=None
         
 # Запустите Streamlit App
 if __name__ == "__main__":
