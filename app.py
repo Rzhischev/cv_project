@@ -12,14 +12,12 @@ PAGES = {
     "YOLO8 Page": yolo8_page
 }
 
-# def main():
-#     st.sidebar.title("Navigation")
-#     choice = st.sidebar.radio("Go to", list(PAGES.keys()))
-
-    # # Render the page selected by the user
-    # selected_page = PAGES[choice]
-    # selected_page.app()
-
-# # Run the app
-# if __name__ == "__main__":
-#     main()
+st.set_page_config(
+    page_title= 'Computer Vision | ПРОЕКТ',
+    page_icon="🤖",
+    layout='wide'
+    
+)
+# Run the app
+if __name__ == "__main__":
+    main()
