@@ -4,7 +4,7 @@ from PIL import Image
 
 # Load the YOLO model
 # CONFIG_PATH = 'yolov8n-seg.yaml'  # Path to your YAML configuration file
-WEIGHTS_PATH = 'windmill.pt'  # Path to your weights file
+WEIGHTS_PATH = './pages/windmill.pt'  # Path to your weights file
 # model = YOLO(CONFIG_PATH)
 model = YOLO(WEIGHTS_PATH)
 
