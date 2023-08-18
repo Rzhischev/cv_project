@@ -102,18 +102,19 @@ def app():
     model = load_model(MODEL_PATH, DEVICE)
     
     uploaded_image = st.file_uploader("Загрузите изображение", type=["jpg", "jpeg", "png"])
-    uploaded_file=None
     
-    if uploaded_file is not None:
-    st.session_state.uploaded_image = uploaded_file
-    image = Image.open(st.session_state.uploaded_image)
-    st.image(image, caption='Загруженное изображение', width=600)
+    if uploaded_image is not None:
+        st.session_state.uploaded_image = uploaded_image
+        image = Image.open(st.session_state.uploaded_image)
+        st.image(image, caption='Загруженное изображение', width=600)
         
-    processed_image = process_image(st.session_state.uploaded_image, model, DEVICE)
-    processed_image_numpy = processed_image.cpu().squeeze().numpy()
-    processed_image_pil = Image.fromarray((processed_image_numpy * 255).astype('uint8'))
+        processed_image = process_image(st.session_state.uploaded_image, model, DEVICE)
+        processed_image_numpy = processed_image.cpu().squeeze().numpy()
+        processed_image_pil = Image.fromarray((processed_image_numpy * 255).astype('uint8'))
         
-    st.image(processed_image_pil, caption='Обработанное изображение', width=600)
+        st.image(processed_image_pil, caption='Обработанное изображение', width=600)
+
 # Запустите Streamlit App
 if __name__ == "__main__":
     app()
+
