@@ -106,14 +106,15 @@ def app():
     if uploaded_image is not None:
         st.session_state.uploaded_image = uploaded_image
         image = Image.open(st.session_state.uploaded_image)
-        st.image(image, caption='Загруженное изображение', use_column_width=True)
+        # Ограничиваем ширину загруженного изображения до 300 пикселей
+        st.image(image, caption='Загруженное изображение', width=300)
         
         processed_image = process_image(st.session_state.uploaded_image, model, DEVICE)
-        
         processed_image_numpy = processed_image.cpu().squeeze().numpy()
         processed_image_pil = Image.fromarray((processed_image_numpy * 255).astype('uint8'))
-        st.image(processed_image_pil, caption='Обработанное изображение', use_column_width=True)
-
+        
+        # Ограничиваем ширину обработанного изображения до 300 пикселей
+        st.image(processed_image_pil, caption='Обработанное изображение', width=300)
 # Запустите Streamlit App
 if __name__ == "__main__":
     app()
