@@ -22,7 +22,7 @@ model = load_model()
 def app():
     st.title("Модель обнаружения ветряков")
     st.write("Эта страница использует модель YOLOv8 для обнаружения ветряков на изображениях.")
-    
+    uploaded_file = None
     # Upload image through file uploader
     uploaded_image = st.file_uploader("Загрузите изображение", type=["jpg", "jpeg", "png"])
     
