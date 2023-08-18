@@ -67,12 +67,8 @@ class ConvAutoencoder(nn.Module):
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_PATH = './pages/encoding.pt'
-def get_session_state():
-    """Gets session state from Streamlit.
 
-    Returns:
-        [Server.SessionState]: Session state object.
-    """
+def get_session_state():
     session_id = get_report_ctx().session_id
     session_infos = Server.get_current()._get_session_info(session_id)
     if session_infos is None:
@@ -81,7 +77,7 @@ def get_session_state():
 
 if 'uploaded_image' not in st.session_state:
     st.session_state.uploaded_image = None
-    
+
 @st.cache(allow_output_mutation=True)
 def load_model(model_path, device):
     model = torch.load(model_path, map_location=device)
@@ -108,21 +104,16 @@ def app():
     uploaded_image = st.file_uploader("Загрузите изображение", type=["jpg", "jpeg", "png"])
     
     if uploaded_image is not None:
-        image = Image.open(uploaded_image)
+        st.session_state.uploaded_image = uploaded_image
+        image = Image.open(st.session_state.uploaded_image)
         st.image(image, caption='Загруженное изображение', use_column_width=True)
         
-        processed_image = process_image(uploaded_image, model, DEVICE)
+        processed_image = process_image(st.session_state.uploaded_image, model, DEVICE)
         
-        # Преобразование тензора PyTorch в массив NumPy
         processed_image_numpy = processed_image.cpu().squeeze().numpy()
-        
-        # Преобразование массива NumPy в объект PIL Image
         processed_image_pil = Image.fromarray((processed_image_numpy * 255).astype('uint8'))
-        
-        # Показать обработанное изображение с помощью Streamlit
         st.image(processed_image_pil, caption='Обработанное изображение', use_column_width=True)
-        uploaded_file=None
-        
+
 # Запустите Streamlit App
 if __name__ == "__main__":
     app()
