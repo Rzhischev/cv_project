@@ -6,7 +6,18 @@ from io import BytesIO
 
 # Load the YOLO model
 WEIGHTS_PATH = './pages/windmill1.pt'  # Path to your weights file
-model = YOLO(WEIGHTS_PATH)
+@st.cache(allow_output_mutation=True)
+def load_model():
+    """
+    Load the YOLO model from the disk.
+    The function is cached to reuse the loaded model across different runs of the Streamlit app,
+    which saves time as loading the model can be expensive.
+    """
+    model = YOLO(WEIGHTS_PATH)
+    return model
+
+# Load the cached model
+model = load_model()
 
 def app():
     st.title("Модель обнаружения ветряков")
