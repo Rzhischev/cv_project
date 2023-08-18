@@ -1,16 +1,4 @@
 import streamlit as st
-from pages import encoder_page, pizza_page, yolo8_page
-import ssl
-
-# Отключение проверки SSL-сертификата
-ssl._create_default_https_context = ssl._create_unverified_context
-
-# Define the pages in the app
-PAGES = {
-    "Encoder Page": encoder_page,
-    "Pizza Page": pizza_page,
-    "YOLO8 Page": yolo8_page
-}
 
 st.set_page_config(
     page_title= 'Computer Vision | ПРОЕКТ',
@@ -18,6 +6,16 @@ st.set_page_config(
     layout='wide'
     
 )
-# Run the app
-if __name__ == "__main__":
-    main()
+
+st.sidebar.header("Home page")
+c1, c2 = st.columns(2)
+
+c2.image('https://s41256.pcdn.co/wp-content/uploads/2019/04/SLIDER-Appen_image_annotation_05.jpg')
+
+c1.markdown("""
+# Проект по Компьютерному зрению
+### Cостоит из 3 частей:
+ ##### 1. Детекция ингридиентов пиццы с помощью YOLOv5
+ ##### 2. Детекция опухулей мозга по фотографии с помощью YOLOv5
+ ##### 3. Очищение документов от шумов с помощью автоэнкодера 
+""")
