@@ -3,6 +3,7 @@ from ultralytics import YOLO
 from PIL import Image
 import requests
 from io import BytesIO
+import os, json, cv2, random
 
 # Load the YOLO model
 MODEL_PATH = './pages/pizza.pt'
