@@ -5,7 +5,7 @@ import requests
 from io import BytesIO
 
 # Load the YOLO model
-WEIGHTS_PATH = './pages/windmill.pt'  # Path to your weights file
+WEIGHTS_PATH = './pages/windmill1.pt'  # Path to your weights file
 model = YOLO(WEIGHTS_PATH)
 
 def app():
