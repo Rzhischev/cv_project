@@ -66,7 +66,7 @@ class ConvAutoencoder(nn.Module):
         return out
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = '/Users/rzhishchev/Downloads/encoding.pt'
+MODEL_PATH = 'encoding.pt'
 
 def load_model(model_path, device):
     model = torch.load(model_path, map_location=device)
