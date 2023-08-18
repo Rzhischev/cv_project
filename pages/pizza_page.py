@@ -7,7 +7,13 @@ import os, json, cv2, random
 
 # Load the YOLO model
 MODEL_PATH = './pages/pizza.pt'
-model = YOLO(MODEL_PATH)
+
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = YOLO(MODEL_PATH)
+    return model
+
+model = load_model()
 
 def app():
     st.title("Модель для обнаружения ингридиентов пиццы")
