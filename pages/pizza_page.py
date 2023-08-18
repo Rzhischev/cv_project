@@ -5,7 +5,7 @@ import requests
 from io import BytesIO
 
 # Load the YOLO model
-MODEL_PATH = 'pizza.pt'
+MODEL_PATH = './pages/pizza.pt'
 model = YOLO(MODEL_PATH)
 
 def app():
