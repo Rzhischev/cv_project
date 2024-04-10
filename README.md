@@ -1,4 +1,4 @@
-# cv_project
+# Computer Vision
 CV project - Инференс модели
 ## 📚 Библиотеки 
 
